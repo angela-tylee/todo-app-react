@@ -93,44 +93,6 @@ const App = () => {
     );
   }
 
-  // drag n drop
-
-  // const draggedItem = useRef(null);
-  // const [dragOverIndex, setDragOverIndex] = useState(null);
-
-  // const handleDragStart = (e, index) => {
-  //   draggedItem.current = index;
-  //   setTimeout(() => {
-  //     e.target.classList.add('dragging');
-  //     e.target.style.display = 'none';
-  //   }, 0);
-  // };
-
-  // const handleDragEnd = (e) => {
-  //   e.target.classList.remove('dragging');
-  //   e.target.style.display = 'flex';
-  //   setDragOverIndex(null);
-  //   draggedItem.current = null;
-  // };
-
-  // const handleDragOver = (e, index) => {
-  //   e.preventDefault();
-  //   if (draggedItem.current !== index) {
-  //     setDragOverIndex(index);
-  //   }
-  // };
-
-  // const handleDrop = (e, index) => {
-  //   e.preventDefault();
-  //   if (draggedItem.current !== null && draggedItem.current !== index) {
-  //     const newTasks = [...tasks];
-  //     const draggedTask = newTasks.splice(draggedItem.current, 1)[0];
-  //     newTasks.splice(index, 0, draggedTask);
-  //     setTasks(newTasks);
-  //   }
-  //   setDragOverIndex(null);
-  // };
-
   return (
     <div className="container wrapper">
       <header>
@@ -177,24 +139,11 @@ const App = () => {
                 )
                 .map((task, index) => (
                   <div key={index}>
-                    {/* {dragOverIndex === index && (
-                      <li
-                        className="placeholder"
-                        style={{
-                          height: '80px',
-                          background: '#ddd',
-                          margin: '5px 0',
-                        }}
-                      ></li>
-                    )} */}
+
                     <div
                       className="list-item"
                       id="list-item"
-                      // draggable="true"
-                      // onDragStart={(e) => handleDragStart(e, index)}
-                      // onDragEnd={handleDragEnd}
-                      // onDragOver={(e) => handleDragOver(e, index)}
-                      // onDrop={(e) => handleDrop(e, index)}
+
                     >
                       <div className="input-container">
                         <input
@@ -229,12 +178,7 @@ const App = () => {
                     </div>
                   </div>
                 ))}
-            {/* {dragOverIndex === tasks.length && (
-              <li
-                className="placeholder"
-                style={{ height: '80px', background: '#ddd', margin: '5px 0' }}
-              ></li>
-            )} */}
+
           </div>
           <div className="list-total">
             <div>
@@ -242,35 +186,7 @@ const App = () => {
             </div>
             <div className="filter">
               <Filter filter={filter} setFilter={setFilter} />
-              {/* <ul>
-                <li
-                  id="filter-all"
-                  className={`${filter === 'all' ? 'selected' : ''}`}
-                  onClick={() => {
-                    setFilter('all');
-                  }}
-                >
-                  All
-                </li>
-                <li
-                  id="filter-active"
-                  className={`${filter === 'false' ? 'selected' : ''}`}
-                  onClick={() => {
-                    setFilter('false');
-                  }}
-                >
-                  Active
-                </li>
-                <li
-                  id="filter-completed"
-                  className={`${filter === 'true' ? 'selected' : ''}`}
-                  onClick={() => {
-                    setFilter('true');
-                  }}
-                >
-                  Completed
-                </li>
-              </ul> */}
+              
             </div>
             <div
               id="clear-completed"
@@ -281,41 +197,10 @@ const App = () => {
             </div>
           </div>
         </div>
-        {/* TODO: 元件化 */}
         <div className="mobile-filter">
         <Filter filter={filter} setFilter={setFilter} />
-          {/* <ul>
-            <li
-              id="filter-all"
-              className="selected"
-              onClick={() => {
-                setFilter('all');
-              }}
-            >
-              All
-            </li>
-            <li
-              id="filter-active"
-              onClick={() => {
-                setFilter('false');
-              }}
-            >
-              Active
-            </li>
-            <li
-              id="filter-completed"
-              onClick={() => {
-                setFilter('true');
-              }}
-            >
-              Completed
-            </li>
-          </ul> */}
         </div>
       </main>
-      {/* <div className="drag-n-drop">
-        <p>Drag and drop to reorder list</p>
-      </div> */}
 
       <footer>
         <div className="attribution">
