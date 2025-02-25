@@ -151,7 +151,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:checked {
-  content: url('./images/icon-check.svg');
+  content: url('/images/icon-check.svg');
   padding: 7px;
   background: var(--check-background);
 }
@@ -233,7 +233,7 @@ body.light-theme {
   background-color: var(--light-very-light-grayish-blue);
   color: var(--light-dark-grayish-blue);
   &::after{
-    background-image: url('./images/bg-desktop-light.jpg');
+    background-image: url('/images/bg-desktop-light.jpg');
   }
 
   input {
@@ -290,7 +290,7 @@ body.dark-theme {
   background-color: var(--dark-very-dark-blue);
   color: var(--dark-dark-grayish-blue);
   &::after{
-    background-image: url('./images/bg-desktop-dark.jpg');
+    background-image: url('/images/bg-desktop-dark.jpg');
   }
 
   input {

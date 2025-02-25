@@ -30,7 +30,6 @@ Users should be able to:
 - Filter by all/active/complete todos
 - Clear all completed todos
 - Toggle light and dark mode
-- **Bonus**: Drag and drop to reorder items on the list
 
 ### Screenshot
 
@@ -55,12 +54,13 @@ Users should be able to:
 
 ### What I learned
 
-- Handle basic state changes from JavaScript to using React.
+- Handle basic state changes using React.
 
 ### Continued development
 
 - Identify duplicated tasks
 - Show task prompt on change
+- Drag and Drop
 
 ### Useful resources
 
