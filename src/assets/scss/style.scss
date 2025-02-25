@@ -27,6 +27,7 @@ html {
 }
 
 body {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -65,7 +66,6 @@ body, input, input::placeholder {
   width: 40%;
   min-width: 580px;
   margin: 0 auto;
-  margin-top: 8em;
   z-index: 1;
   position: relative;
 }
@@ -77,6 +77,7 @@ body, input, input::placeholder {
 }
 
 header {
+  margin-top: 8em;
   padding-block: 1em;
   display: flex;
   justify-content: space-between;

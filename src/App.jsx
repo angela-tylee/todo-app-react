@@ -1,18 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Filter from './components/Filter';
 
-// FIXME: Drag n Drop fail
-// FIXME: Cannot delete the last item from localStorage
-// FIXME: Initial window is over 100vh
-
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  // const [tempData, setTempData] = useState({
-  //   task: '',
-  //   isCompleted: false,
-  //   id: 0,
-  // });
   const [tempData, setTempData] = useState('');
+  const [filter, setFilter] = useState('all');
 
   // switch theme
   const [theme, setTheme] = useState('light');
@@ -37,27 +29,6 @@ const App = () => {
     localStorage.setItem('theme', newTheme);
   };
 
-  // add task
-  function handleAddTask(e) {
-    e.preventDefault();
-    if (!tempData.trim()) return;
-
-    setTasks([
-      ...tasks,
-      { task: tempData, isCompleted: false, id: Date.now() },
-    ]);
-    setTempData('');
-  }
-
-  // store tasks to local storage
-  const [filter, setFilter] = useState('all');
-
-  useEffect(() => {
-    if (tasks.length > 0) {
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-  }, [tasks, filter]);
-
   // loadTasks;
   useEffect(() => {
     const savedTasks = localStorage.getItem('tasks');
@@ -66,16 +37,57 @@ const App = () => {
     }
   }, []);
 
+  // add task
+  function handleAddTask(e) {
+
+    e.preventDefault();
+    if (!tempData.trim()) return;
+
+    const newTask = { task: tempData, isCompleted: false, id: Date.now() };
+    
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks, newTask];
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
+    setTempData('');
+  }
+
+  // toggle task
+
+  function toggleTask(e, id) {
+
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) => 
+        task.id === id ? { ...task, isCompleted: e.target.checked } : task
+      );
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
+
+  }
+
   // delete task
   function deleteTask(id) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    // setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   }
 
   // clear completed
   function deleteCompletedTasks() {
-    setTasks((prevTasks) =>
-      prevTasks.filter((task) => task.isCompleted !== true)
-    );
+    // setTasks((prevTasks) =>
+    //   prevTasks.filter((task) => task.isCompleted !== true)
+    // );
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => !task.isCompleted);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   }
 
   return (
@@ -125,15 +137,9 @@ const App = () => {
                           type="checkbox"
                           id="checkbox"
                           checked={task.isCompleted}
-                          onChange={(e) =>
-                            setTasks(
-                              tasks.map((item) =>
-                                item.id === task.id
-                                  ? { ...task, isCompleted: e.target.checked }
-                                  : item
-                              )
-                            )
-                          }
+                          onChange={(e) => {
+                            toggleTask(e, task.id);
+                          }}
                         />
                         <p>{task.task}</p>
                       </div>
@@ -177,7 +183,6 @@ const App = () => {
           <Filter filter={filter} setFilter={setFilter} />
         </div>
       </main>
-
       <footer>
         <div className="attribution">
           Challenge by{' '}
