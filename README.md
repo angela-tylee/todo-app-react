@@ -51,19 +51,16 @@ Users should be able to:
 ### Built with
 
 - React
-- Redux
 - Vite
 
 ### What I learned
 
-- Redux
+- Handle basic state changes from JavaScript to using React.
 
 ### Continued development
 
-- extend input field width
-- add `.list-item p` text wrap
-- identify duplicated tasks
-- undo delete task
+- Identify duplicated tasks
+- Show task prompt on change
 
 ### Useful resources
 
